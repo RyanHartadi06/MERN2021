@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const methodOverride = require("method-override");
 
 const dashboardRouter = require("./app/dashboard/router");
 const categoryRouter = require("./app/category/router");
@@ -22,7 +23,7 @@ app.use(
   "/adminlte",
   express.static(path.join(__dirname, "/node_modules/admin-lte/"))
 );
-
+app.use(methodOverride("X-HTTP-Method-Override"));
 app.use("/", dashboardRouter);
 app.use("/category", categoryRouter);
 
