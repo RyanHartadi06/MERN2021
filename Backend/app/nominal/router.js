@@ -2,15 +2,15 @@ const express = require("express");
 const router = express.Router();
 const {
   index,
-  createCategory,
+  createNominal,
   actionCreate,
+  actionDelete,
   viewEdit,
   actionEdit,
-  actionDelete,
 } = require("./controller");
 
 router.get("/", index);
-router.get("/create", createCategory);
+router.get("/create", createNominal);
 router.post("/create", actionCreate);
 router.get("/edit/:id", viewEdit);
 router.put("/update/:id", actionEdit);
