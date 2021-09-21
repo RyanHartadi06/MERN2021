@@ -189,7 +189,7 @@ module.exports = {
   actionStatus: async (req, res) => {
     try {
       const { id } = req.params;
-      const voucher = await Voucher.findOne({ _id: id });
+      let voucher = await Voucher.findOne({ _id: id });
       let status = voucher.status === "Y" ? "N" : "Y";
       voucher = await Voucher.findOneAndUpdate(
         {
