@@ -38,7 +38,7 @@ export default function EditProfile() {
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                                     d="M45 52.875C44.3787 52.875 43.875 52.3713 43.875 51.75V45C43.875 44.3787 44.3787 43.875 45 43.875C45.6213 43.875 46.125 44.3787 46.125 45V51.75C46.125 52.3713 45.6213 52.875 45 52.875Z"
                                                     fill="#0C145A" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                <path fill-rule="evenodd" clip-rule="evenodd" 
                                                     d="M41.9545 48.0455C41.5152 47.6062 41.5152 46.8938 41.9545 46.4545L44.2045 44.2045C44.6438 43.7652 45.3562 43.7652 45.7955 44.2045C46.2348 44.6438 46.2348 45.3562 45.7955 45.7955L43.5455 48.0455C43.1062 48.4848 42.3938 48.4848 41.9545 48.0455Z"
                                                     fill="#0C145A" />
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
