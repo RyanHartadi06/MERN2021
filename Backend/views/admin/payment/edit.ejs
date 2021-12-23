@@ -6,13 +6,13 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Kategori</h1>
+          <h1>Payment</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/nominal">Nominal</a></li>
-            <li class="breadcrumb-item active">Ubah</li>
+            <li class="breadcrumb-item"><a href="/payment">Payment</a></li>
+            <li class="breadcrumb-item active">Tambah</li>
           </ol>
         </div>
       </div>
@@ -27,56 +27,51 @@
         <div class="col-12">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Ubah Nominal "<%=nominal.coinName%>"</h3>
+              <h3 class="card-title">Tambah Payment</h3>
             </div>
-            <form action="/nominal/update/<%=nominal._id %>?_method=PUT" method="POST">
+            <form
+            action="/payment/update/<%= payment._id %>?_method=PUT"
+              method="POST"
+            >
               <div class="card-body">
                 <div class="form-group">
-                  <label>Nama Koin</label>
-                  <select
-                    class="form-control select2 select2-danger"
-                    data-dropdown-css-class="select2-danger"
-                    style="width: 100%"
-                    name="coinName"
-                    required
-                  >
-                    
-                    <option value="Gold" 
-                    <% if(nominal.coinName === "Gold") {%>
-                      selected
-                     <%}%> 
-                      >Gold</option>
-                    <option value="Diamond"  <% if(nominal.coinName === "Diamond") {%>
-                      selected
-                     <%}%>>Diamond</option>
-                    <option value="Jewel"  <% if(nominal.coinName === "Jewel") {%>
-                      selected
-                     <%}%>>Jewel</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="coinQuantity">Jumlah Koin</label>
+                  <label for="type">Tipe</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="coinQuantity"
-                    name="coinQuantity"
-                    placeholder="Jumlah Koin"
-                    value="<%=nominal.coinQuantity%>"
+                    id="type"
+                    name="type"
+                    placeholder="Type"
                     required
+                    value="<%= payment.type%>"
                   />
                 </div>
+               
                 <div class="form-group">
-                  <label for="price">Harga</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="price"
-                    name="price"
-                    placeholder="Masukkan Harga"
-                    value="<%=nominal.price%>"
-                    required
-                  />
+                  <label>Bank</label>
+                  <div class="select2-purple">
+                    <select
+                      class="form-control select2 select2-danger"
+                      multiple="multiple"
+                      data-dropdown-css-class="select2-danger"
+                      style="width: 100%"
+                      name="banks"
+                      data-placeholder="Pilih Bank"
+                      required
+                    >
+                    <% bank.forEach(bank => {%>
+                      <option value="<%= bank._id%>" 
+                        <% payment.banks.forEach(banks => { %>
+                         <% if(banks._id.toString() === bank._id.toString()){%>
+                            selected
+                          <% } %>
+                      <% }) %>
+                      >
+                        <%= bank.name%> - <%= bank.nameBank%> - <%= bank.noRekening%>
+                      </option>
+                      <% }) %>
+                    </select>
+                  </div>
                 </div>
               </div>
               <div class="card-footer">
@@ -95,3 +90,4 @@
 </div>
 
 <%- include ../../partials/footer.ejs %> <%- include ../../partials/js.ejs %>
+

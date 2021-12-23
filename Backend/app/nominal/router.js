@@ -8,7 +8,9 @@ const {
   viewEdit,
   actionEdit,
 } = require("./controller");
+const {isLogin} = require('../middleware/auth');
 
+router.use(isLogin);
 router.get("/", index);
 router.get("/create", createNominal);
 router.post("/create", actionCreate);

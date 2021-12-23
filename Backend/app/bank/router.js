@@ -7,7 +7,9 @@ const {
   actionEdit,
   viewEdit,actionDelete
 } = require("./controller");
+const {isLogin} = require('../middleware/auth');
 
+router.use(isLogin);
 router.get("/", index);
 router.get("/create", createBank);
 router.post("/send", actionCreate);

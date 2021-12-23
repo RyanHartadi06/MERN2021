@@ -1,7 +1,7 @@
 module.exports = {
   index: async (req, res) => {
     try {
-      res.render("index", { title: "eqqwe" });
+      res.render("index", { name: req.session.user.name });
     } catch (error) {
       console.log(error);
     }

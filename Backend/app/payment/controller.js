@@ -10,7 +10,7 @@ module.exports = {
           const alert = { message: alertMessage, status: alertStatus };
           const payment = await Payment.find().populate('banks');
     
-          res.render("admin/payment/view_payment", { payment, alert });
+          res.render("admin/payment/view_payment", { payment, alert ,  name: req.session.user.name });
         } catch (error) {
           req.flash("alertMessage", `${error.message}`);
           req.flash("alertStatus", "danger");
@@ -20,7 +20,7 @@ module.exports = {
       viewCreate: async (req, res) => {
         try {
           const banks = await Bank.find();
-          res.render("admin/payment/create" , {banks});
+          res.render("admin/payment/create" , {banks ,  name: req.session.user.name });
         } catch (error) {
           req.flash("alertMessage", `${error.message}`);
           req.flash("alertStatus", "danger");
@@ -41,34 +41,35 @@ module.exports = {
           res.redirect("/payment");
         }
       },
-//       viewEdit: async (req, res) => {
-//         try {
-//           const { id } = req.params;
-//           const nominal = await Nominal.findOne({ _id: id });
-//           res.render("admin/nominal/edit", { nominal });
-//         } catch (error) {
-//           req.flash("alertMessage", `${error.message}`);
-//           req.flash("alertStatus", "danger");
-//           res.redirect("/nominal");
-//         }
-//       },
-//       actionEdit: async (req, res) => {
-//         try {
-//           const { id } = req.params;
-//           const { coinName, coinQuantity, price } = req.body;
-//           const nominal = await Nominal.findOneAndUpdate(
-//             { _id: id },
-//             { coinName, coinQuantity, price }
-//           );
-//           req.flash("alertMessage", "Berhasil edit kategori");
-//           req.flash("alertStatus", "success");
-//           res.redirect("/nominal");
-//         } catch (error) {
-//           req.flash("alertMessage", `${error.message}`);
-//           req.flash("alertStatus", "danger");
-//           res.redirect("/nominal");
-//         }
-//       },
+      viewEdit: async (req, res) => {
+        try {
+          const { id } = req.params;
+          const payment = await Payment.findOne({ _id: id }).populate('banks');
+          const bank = await Bank.find();
+          res.render("admin/payment/edit", { payment , bank ,  name: req.session.user.name  });
+        } catch (error) {
+          req.flash("alertMessage", `${error.message}`);
+          req.flash("alertStatus", "danger");
+          res.redirect("/payment");
+        }
+      },
+      actionEdit: async (req, res) => {
+        try {
+          const { id } = req.params;
+          const { type, banks } = req.body;
+          const payment = await Payment.findOneAndUpdate(
+            { _id: id },
+            { type, banks }
+          );
+          req.flash("alertMessage", "Berhasil edit kategori");
+          req.flash("alertStatus", "success");
+          res.redirect("/payment");
+        } catch (error) {
+          req.flash("alertMessage", `${error.message}`);
+          req.flash("alertStatus", "danger");
+          res.redirect("/payment");
+        }
+      },
       actionDelete: async (req, res) => {
         try {
           const { id } = req.params;
