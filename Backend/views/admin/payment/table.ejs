@@ -2,9 +2,9 @@
   <thead>
     <tr>
       <th>No.</th>
-      <th>Nama Koin</th>
-      <th>Jumlah Koin</th>
-      <th>Harga Koin</th>
+      <th>Type</th>
+      <th>Bank</th>
+      <th>Status</th>
       <th>Aksi</th>
     </tr>
   </thead>
@@ -13,8 +13,19 @@
     <tr>
       <td><%= i+1%></td>
       <td><%= payment[i].type%></td>
-      <td><%= payment[i].status%></td>
-      <td><%= payment[i].banks%></td>
+      <td>  
+        <% payment[i].banks.forEach(bank => { %>
+          <span class="badge badge-warning">
+            <%= bank.name%> -  <%= bank.nameBank %>
+          </span>
+        <% }); %>
+      </td>
+      <td>
+          <% if(payment[i].status === 'Y'){%>
+          <span class="badge badge-success">Aktif</span>
+          <%} else { %>
+          <span class="badge badge-danger">Tidak Aktif</span>
+          <%} %>
       <td>
         <form
           action="/payment/delete/<%= payment[i]._id%>?_method=DELETE"
